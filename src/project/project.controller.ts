@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { Project } from './project';
+import { Put, Body, Param, Delete } from '@nestjs/common';
+import { log } from 'console';
 
 @Controller({ path: 'project' })
 export class ProjectController {
@@ -17,6 +19,7 @@ export class ProjectController {
   }
 
   // /project/create => create project
+  //  @Post,@Delete etc correspond au type d'appel dans postcode
   @Post('/create')
   createProject(@Req() request: Request): any {
     const newProject: Project = {
@@ -28,5 +31,19 @@ export class ProjectController {
     };
     const projectCreated = this.projectService.createProject(newProject);
     return projectCreated;
+  }
+
+  // besoin de créer des id pour remplacer name
+  @Put(':name')
+  update(@Param('name') name: string, @Body() updatedProject: Project) {
+    const updateSucces = this.projectService.update(name, updatedProject);
+    console.log('Update succes', updateSucces);
+    return updateSucces;
+  }
+
+  @Delete(':name')
+  remove(@Param('name') name: string) {
+    const deleteSuccess = this.projectService.delete(name);
+    return deleteSuccess;
   }
 }

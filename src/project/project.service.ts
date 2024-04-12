@@ -71,4 +71,52 @@ export class ProjectService {
       return true;
     }
   }
+
+  // avec this.
+  // if nom pas trouvé + message
+  // else créer le nouveau tab + message
+
+  delete(nameProject: string) {
+    // créer un nouveau tableau vide,
+    let tab = [];
+    let projectKnow = false;
+    //parcourir tout le tab (tout les projs)
+    for (let i = 0; i < this.projects.length; i++) {
+      const project = this.projects[i];
+      console.log('____________________________');
+      console.log(project);
+
+      if (project.name != nameProject) {
+        // copie tout les noms sauf le nameProject
+        tab.push(project);
+      } else {
+        projectKnow = true;
+      }
+    }
+    console.log('tab =', tab);
+    // que le tab de copie remplace le tab initial
+    this.projects = tab;
+    return projectKnow;
+  }
+
+  update(name: string, updatedProject: Project): boolean {
+    let projectKnow = false;
+    // chercher le projet dans le tab
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].name === name) {
+        // Mettre à jour le projet
+        this.projects[i] = updatedProject;
+        projectKnow = true;
+      }
+    }
+    // Vérifier si le projet a été trouvé et mis à jour
+    if (projectKnow) {
+      console.log('Le projet a été mis à jour avec succès.');
+
+      // else nom de projet pas trouvé + message
+    } else {
+      console.log("Le projet n'a pas été trouvé.");
+    }
+    return projectKnow;
+  }
 }

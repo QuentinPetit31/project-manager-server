@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { Person } from './person';
 
@@ -18,15 +18,15 @@ export class PersonController {
 
   // /person/create => create person
   //  @Post,@Delete etc correspond au type d'appel dans postcode
-  // @Post('/create')
-  // createPerson(@Req() request: Request): any {
-  //   const newPerson: Person = {
-  //     id: request.body['id'],
-  //     firstName: request.body['firstName'],
-  //     lastName: request.body['lastName'],
-  //     job: request.body['job'],
-  //   };
-  //   const personCreated = this.PersonService.createPerson(newPerson);
-  //   return personCreated;
-  // }
+  @Post()
+  createPerson(@Body() newPerson: Person): any {
+    // const newPerson: Person = {
+    //   id: request.body['id'],
+    //   firstName: request.body['firstName'],
+    //   lastName: request.body['lastName'],
+    //   job: request.body['job'],
+    // };
+    const personCreated = this.personService.createPerson(newPerson);
+    return personCreated;
+  }
 }

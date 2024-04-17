@@ -72,10 +72,6 @@ export class ProjectService {
     }
   }
 
-  // avec this.
-  // if nom pas trouvé + message
-  // else créer le nouveau tab + message
-
   delete(nameProject: string) {
     // créer un nouveau tableau vide,
     let tab = [];

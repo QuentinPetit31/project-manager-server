@@ -86,4 +86,46 @@ export class PersonService {
     console.log('createPerson success ', newPerson);
     return true;
   }
+
+  update(updatedPerson: Person): boolean {
+    let personKnow = false;
+    for (let i = 0; i < this.persons.length; i++) {
+      if (this.persons[i].id === updatedPerson.id) {
+        // Mettre à jour la personne
+        this.persons[i] = updatedPerson;
+        personKnow = true;
+      }
+    } // Vérifier si la personne a été trouvée et mise à jour
+    if (personKnow) {
+      console.log('La personne a été mise à jour avec succès.');
+
+      // else id de personne pas trouvé + message
+    } else {
+      console.log("La personne n'a pas été trouvée.");
+    }
+    return personKnow;
+  }
+
+  delete(idPerson: string) {
+    // créer un nouveau tableau vide,
+    let tab = [];
+    let idPersonKnow = false;
+    //parcourir tout le tab (tout les persons)
+    for (let i = 0; i < this.persons.length; i++) {
+      const person = this.persons[i];
+      console.log('____________________________');
+      console.log(person);
+
+      if (person.id != idPerson) {
+        // copie tout les noms sauf le idPerson
+        tab.push(person);
+      } else {
+        idPersonKnow = true;
+      }
+    }
+    console.log('tab =', tab);
+    // que le tab de copie remplace le tab initial
+    this.persons = tab;
+    return idPersonKnow;
+  }
 }

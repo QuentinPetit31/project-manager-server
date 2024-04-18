@@ -23,6 +23,7 @@ export class ProjectController {
   @Post('/create')
   createProject(@Req() request: Request): any {
     const newProject: Project = {
+      id: request.body['id'],
       name: request.body['name'],
       description: request.body['description'],
       startDate: request.body['startDate'],

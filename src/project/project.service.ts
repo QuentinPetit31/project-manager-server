@@ -5,6 +5,7 @@ import { Project } from './project';
 export class ProjectService {
   projects: Project[] = [
     {
+      id: 'PROJ_001',
       name: 'toto',
       description: 'description',
       startDate: '25/08/2000',
@@ -12,36 +13,40 @@ export class ProjectService {
       personnes: ['toto', 'tata', 'titi'],
     },
     {
+      id: 'PROJ_002',
       name: 'Basic Computer Skills Workshop',
       description:
-        'Host a series of workshops to teach basic computer skills such as using email, browsing the internet, and using word processing software. Sarah will lead the workshops, with support from David and Emily.',
+        'Host a series of workshops to teach basic computer skills such as using email, browsing the internet, and using word processing software. Nicolas will lead the workshops, with support from Maxime and Julie.',
       startDate: '25/02/2024',
       endDate: '27/02/2024',
-      personnes: ['Sarah', 'David', 'Emily'],
+      personnes: ['Nicolas', 'Maxime', 'Julie'],
     },
     {
+      id: 'PROJ_003',
       name: 'Tech Support for Seniors',
       description:
-        'Provide personalized tech support sessions for seniors to help them navigate their computers, smartphones, and tablets. James will coordinate the sessions, while Lisa and Michael will assist the seniors.',
+        'Provide personalized tech support sessions for seniors to help them navigate their computers, smartphones, and tablets. Sophie will coordinate the sessions, while Emma and Michael will assist the seniors.',
       startDate: '15/01/2011',
       endDate: '17/01/2011',
-      personnes: ['James', 'Lisa', 'Michael'],
+      personnes: ['Sophie', 'Emma', 'Lucas'],
     },
     {
+      id: 'PROJ_004',
       name: 'Coding Club for Kids',
       description:
-        'Start a coding club for kids to learn programming basics in a fun and interactive way. Emma will lead the club, with help from Ethan and Olivia.',
+        'Start a coding club for kids to learn programming basics in a fun and interactive way. Emma will lead the club, with help from Julie and Nicolas.',
       startDate: '25/08/2020',
       endDate: '27/08/2020',
-      personnes: ['Michael', 'David', 'Emma'],
+      personnes: ['Nicolas', 'Julie', 'Emma'],
     },
     {
+      id: 'PROJ_005',
       name: 'Website Building Workshop',
       description:
-        'Conduct a workshop to teach participants how to build their own websites using user-friendly platforms. Thomas will lead the workshop, with support from Rachel and Benjamin.',
+        'Conduct a workshop to teach participants how to build their own websites using user-friendly platforms. Thomas will lead the workshop, with support from Emma, Quentin and Nicolas.',
       startDate: '02/09/2023',
       endDate: '29/08/2023',
-      personnes: ['Thomas', 'David', 'Emma', 'Quentin'],
+      personnes: ['Thomas', 'Nicolas', 'Emma', 'Quentin'],
     },
   ];
 
@@ -50,26 +55,19 @@ export class ProjectService {
   }
 
   createProject(newProject: Project): boolean {
-    // check request.body have the good format
-    if (!newProject.name || newProject.name.length <= 2) {
-      return false;
-      // check if project name already exist
-    }
-    let projectNameAlreadyUsed = false;
-    console.log('Appelle createProject');
-    for (let i = 0; i < this.projects.length; i++) {
-      if (this.projects[i].name === newProject.name) {
-        projectNameAlreadyUsed = true;
-      }
-    }
-    if (projectNameAlreadyUsed) {
-      console.log('Le nom du projet est déjà utilisé');
-      return false;
-    } else {
-      this.projects.push(newProject);
-      console.log('createProject success ', newProject);
-      return true;
-    }
+    // récupère le dernier element du tableau, lenght -1
+    // extraire l'id (PERS_01), methode string to number
+    const lastPersonId = this.projects[this.projects.length - 1].id;
+    // Extraire le numéro de l'ID et l'incrémenter
+    const lastIdNumber = parseInt(lastPersonId.split('_')[1]);
+    const newIdNumber = lastIdNumber + 1;
+    // le set comme id de la nouvelle personne
+    const newId = 'PERS_' + newIdNumber.toString().padStart(3, '0');
+    newProject.id = newId;
+    // push le nouvel id
+    this.projects.push(newProject);
+    console.log('createPerson success ', newProject);
+    return true;
   }
 
   delete(nameProject: string) {

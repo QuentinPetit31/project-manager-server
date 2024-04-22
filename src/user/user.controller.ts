@@ -1,10 +1,14 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user';
+import { UsersService } from './users.service';
 
 @Controller({ path: 'user' })
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    // private usersService: UsersService,
+  ) {}
 
   // /project/:name  => detail project
   // /project/:name/update  => update project
@@ -15,6 +19,11 @@ export class UserController {
   getAllUser(): User[] {
     return this.userService.getAllUser();
   }
+
+  // @Get('/2')
+  // getAllUsers() {
+  //   return this.usersService.findAll();
+  // }
 
   // /user/create => create user
   @Post('/create')

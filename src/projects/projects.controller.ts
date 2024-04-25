@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   ParseIntPipe,
+  Put,
 } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 
@@ -29,6 +30,11 @@ export class ProjectsController {
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): Promise<Project> {
     return this.projectsService.findOne(id);
+  }
+
+  @Put()
+  update(@Body() project: Project): Promise<Project> {
+    return this.projectsService.update(project);
   }
 
   @Delete(':id')

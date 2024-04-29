@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Job } from 'src/jobs/job.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Person {
@@ -11,6 +12,6 @@ export class Person {
   @Column()
   lastName: string;
 
-  @Column()
-  job: string;
+  @ManyToOne(() => Job)
+  job: Job;
 }

@@ -41,7 +41,10 @@ export class ProjectsService {
   }
 
   findOne(id: number): Promise<Project> {
-    return this.projectsRepository.findOneBy({ id: id });
+    return this.projectsRepository.findOne({
+      where: { id: id },
+      relations: { persons: { job: true } },
+    });
   }
 
   async remove(id: string): Promise<void> {

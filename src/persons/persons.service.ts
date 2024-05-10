@@ -21,11 +21,15 @@ export class PersonsService {
   }
 
   async findAll(): Promise<Person[]> {
-    return this.personsRepository.find();
+    return this.personsRepository.find({ relations: { job: true } });
   }
 
   findOne(id: number): Promise<Person> {
-    return this.personsRepository.findOneBy({ id: id });
+    // return this.personsRepository.findOneBy({ id: id });
+    return this.personsRepository.findOne({
+      where: { id: id },
+      relations: { job: true },
+    });
   }
 
   async update(updatedPerson: Person): Promise<Person> {

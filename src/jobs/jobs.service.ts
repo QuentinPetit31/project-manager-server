@@ -33,7 +33,7 @@ export class JobsService {
     return this.jobsRepository.save(person);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.jobsRepository.delete(id);
+  async remove(id: string) {
+    return await this.jobsRepository.delete(id);
   }
 }

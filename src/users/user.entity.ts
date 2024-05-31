@@ -14,3 +14,9 @@ export class User {
   @Column()
   password: string;
 }
+
+export class UserWithNoPassword {
+  id: number;
+  name: string;
+  email: string;
+}

@@ -1,4 +1,4 @@
---je veut visualiser toute les peprojectrson sans exception
+--je veut visualiser toute les projects sans exception
 SELECT * FROM `project`;
 
 -- afin de voir qui posséde l'id 3 dans project je tape

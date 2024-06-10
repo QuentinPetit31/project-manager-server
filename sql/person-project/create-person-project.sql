@@ -1,6 +1,6 @@
 -- dans le projet 4 c'est la person qui a l'id 2 qui y contribue
 INSERT INTO `project_persons_person` (`projectId`, `personId`) 
-
+-- mettre à jour ici ?
 VALUES 
 
 ('1', '5'),
